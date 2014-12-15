@@ -1249,7 +1249,6 @@ static int old_server_add(realm_config_t *rc, CONF_SECTION *cs,
 
 		home = talloc_zero(rc, home_server_t);
 		home->name = name;
-		home->hostname = name;
 		home->type = type;
 		home->secret = secret;
 		home->cs = cs;
@@ -1781,7 +1780,7 @@ int realm_realm_add(REALM *r, UNUSED CONF_SECTION *cs)
 	 *	the server.
 	 */
 	if (realms_initialized && !realm_config->dynamic) {
-		DEBUG("Must set \"dynamic = true\" in proxy.conf");
+		ERROR("Failed to add dynamic realm, \"dynamic = true\" must be set in proxy.conf");
 		return 0;
 	}
 
